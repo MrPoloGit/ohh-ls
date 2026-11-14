@@ -9,10 +9,15 @@ same way: start it, speak LSP over stdio.
 ## Build
 
 ```sh
-cd ohh-ls
-mkdir -p build && cd build
-cmake .. && make
+cmake -S . -B build
+cmake --build build -j4
 ```
+
+Works the same way on macOS, Linux and Windows: the only prerequisites
+are a C/C++ compiler and CMake 3.16+, same as `phh-ls`'s own README
+explains in full, tree-sitter (the runtime library) and yyjson are
+fetched and built from source via CMake's `FetchContent`, not found
+through a system package manager.
 
 Produces `ohh-ls` (the LSP server) and `ohh-check` (a standalone CLI for
 fast iteration against the corpus, independent of the LSP/stdio layer, mirrors `phh-check`). Both build against `../tree-sitter-ohh`'s generated
@@ -55,7 +60,7 @@ parser directly, same as `phh-ls` does for its two grammars.
   Fixing this precisely would need hover to carry path context, not done
   in this first pass.
 - **`start_date_utc`'s exact format is not validated**, the spec gives
-  only an example, no explicit grammar .
+  only an example, no explicit grammar.
 - **Card-string format** (`ohh/registry/cards.json`) is not validated at
   all yet, no check corresponds to PHH's short-deck-rank-legality check.
 

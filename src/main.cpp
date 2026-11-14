@@ -1,5 +1,5 @@
 // ohh-ls: a standard-LSP-only server for OHH (.ohh), over stdio. Mirrors
-// phh-ls/src/main.cpp's shape exactly .
+// phh-ls/src/main.cpp's shape exactly.
 
 #include "document.h"
 #include "jsonrpc.h"
@@ -342,6 +342,8 @@ private:
 } // namespace
 
 int main(int argc, char **argv) {
+  ensure_binary_stdio();
+
   if (argc < 2) {
     std::cerr << "usage: ohh-ls <registry-dir>\n";
     return 2;
