@@ -29,7 +29,7 @@ struct Diagnostic {
 // field", nested-object (player_obj, round_obj, etc.) required-field
 // completeness is not checked in this first pass; currency is not
 // validated against ISO 4217 (no list vendored yet, per
-// ohh/registry/README.md's "known gaps").
+// ohh-data/registry/README.md's "known gaps").
 std::vector<Diagnostic> validate(const ParsedDocument &doc, const Registry &registry);
 
 } // namespace ohh

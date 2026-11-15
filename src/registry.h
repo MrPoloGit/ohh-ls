@@ -5,11 +5,11 @@
 #include <string>
 #include <vector>
 
-// Loads ohh/registry/*.json into
+// Loads ohh-data/registry/*.json into
 // lookup structures ohh-ls's validator and hover reads at request time.
 // Mirrors phh-ls/src/registry.h's role for this project; see
-// ohh/registry/README.md for the confidence caveat this registry carries
-// that phh/registry does not (no cross-check against a second
+// ohh-data/registry/README.md for the confidence caveat this registry carries
+// that phh-data/registry does not (no cross-check against a second
 // implementation yet).
 namespace ohh {
 

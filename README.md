@@ -31,7 +31,7 @@ parser directly, same as `phh-ls` does for its two grammars.
   OHH's fields nest arbitrarily (`rounds` → `actions` → `action`), so the
   validator needs the real recursive shape.
 - **Diagnostics** (`src/validate.{h,cpp}`): missing required top-level
-  fields (`ohh/registry/fields.json`), enum-value membership for
+  fields (`ohh-data/registry/fields.json`), enum-value membership for
   `game_type`, `bet_type` (inside `bet_limit`), `street` and `action`
   (inside every round and action), and the spec's own stated exception
   rule ("Bet" is not valid on the "Preflop" street).
@@ -49,7 +49,7 @@ parser directly, same as `phh-ls` does for its two grammars.
   "missing required field." Nested-object required-field completeness
   (e.g. a `player_obj` missing `starting_stack`) is not checked yet.
 - **`currency` is not validated** against ISO 4217, no list is vendored
-  (`ohh/registry/README.md`'s "known gaps"); `Registry::enum_contains`
+  (`ohh-data/registry/README.md`'s "known gaps"); `Registry::enum_contains`
   returns `true` (no-op) for any enum group with no loaded values, by
   design, so an unvalidated field never produces a false diagnostic.
 - **Hover precision for `flags`** is documented as approximate: the
@@ -61,12 +61,12 @@ parser directly, same as `phh-ls` does for its two grammars.
   in this first pass.
 - **`start_date_utc`'s exact format is not validated**, the spec gives
   only an example, no explicit grammar.
-- **Card-string format** (`ohh/registry/cards.json`) is not validated at
+- **Card-string format** (`ohh-data/registry/cards.json`) is not validated at
   all yet, no check corresponds to PHH's short-deck-rank-legality check.
 
 ## How this was verified
 
-- **`ohh-check` against the full corpus** (`ohh/corpus/`) reproduces
+- **`ohh-check` against the full corpus** (`ohh-data/corpus/`) reproduces
   exactly zero diagnostics on every `valid/` fixture and exactly one
   diagnostic, the intended violation, on each `invalid/` fixture.
   **This caught a real registry bug, not a code bug**: `fields.json`
@@ -76,8 +76,8 @@ parser directly, same as `phh-ls` does for its two grammars.
   `holdem-cash-pokerstars.ohh`, the one fixture sourced directly from
   the spec site's own published example, immediately flagged all four
   as missing. Fixed by marking them optional, with the empirical
-  counter-example recorded in `ohh/registry/fields.json` and
-  `ohh/registry/README.md`, rather than trusting the spec's prose over
+  counter-example recorded in `ohh-data/registry/fields.json` and
+  `ohh-data/registry/README.md`, rather than trusting the spec's prose over
   its own worked example.
 - **`ohh-ls/tests/lsp_smoke_test.py` drives the actual server binary**
   over real Content-Length-framed JSON-RPC (not internal function calls):
